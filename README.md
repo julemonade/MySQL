@@ -1,6 +1,7 @@
 **Welcome to my GitHub repository dedicated to MySQL!**  
-Here, you will find a collection of files related to databases and SQL queries. 
-This repository contains two important database files:
+Here, you will find two collections of files related to databases and SQL queries. This repository is divided into two folders, by courses where I studied. 
+
+In **A. Rusau folder** contains two important database files:
 - Hogwarts characters
 - Hogwarts library
 
@@ -17,4 +18,19 @@ SELECT char_id, fname, patronus
 FROM characters
 WHERE patronus IS NOT NULL AND NOT patronus = 'Unknown'
 ORDER BY patronus ASC;
+```
+
+In **V. Ksendzov folder** contains three SQL query files:
+- Homework 1 (DDL quieries)
+- Homework 2 (Quieries to Database with students data)
+- Homework 3 (Quieries to Database created in Homework 1)
+
+Here is an example of query that you can find opening one of the homework files:
+ ```mysql
+ /*   */
+SELECT monthly_salary,employee_name
+FROM salary
+LEFT JOIN employee_salary ON salary.id = employee_salary.salary_id
+LEFT JOIN employees ON employee_salary.employee_id = employees.id
+WHERE employees.employee_name IS null and salary.monthly_salary < 2000;
 ```

@@ -1,38 +1,8 @@
 -- 1. Вывести всех работников чьи зарплаты есть в базе, вместе с зарплатами.
--- выбираем имя работника и зарплату
--- из таблицы "работники" - это будет основная таблица, к которой мы присоединим другие 
-/*присоединяем таблицу "работники+зп (где только айди)" 
-по условию айди работника из таблицы "работники" = айди работника из таблицы "работники+зп"
-т.е. получается что сейчас объединенная таблица выглядит как:
-айди | имя работника | айди es | айди работника | айди зп |*/
--- присоединяем теперь еще таблицу с зп, чтобы айди из таблицы зп совпадала с айди зп в таблице "работники+зп"
--- id e | employee_name | id es | employee_id | salary_id | id s | monthly_salary
--- и теперь когда все соединилось, выводиться будут только 2 и последний столбцы - имя и зп работника
-
 SELECT e.employee_name, s.monthly_salary 
 FROM employees e 
 JOIN employee_salary es ON e.id = es.employee_id 
 JOIN salary s ON es.salary_id = s.id;  
-
-/* сделаем тот же самый запрос, поменяв местами таблицы:
-SELECT e.employee_name, s.monthly_salary
-FROM salary s
-JOIN employee_salary es ON es.salary_id = s.id
-JOIN employees e ON e.id = es.employee_id;
-* выбираем те же самые данные - имя и зп
-* берем из таблицы зарплата
-* к ней присоединяем таблицу, и пишем условие чтобы совпадали айдишки. присоединять таблицы можно в любом порядке, т.к. мы используем общий join
-* общий join будет возвращать только те строки, которые имеют соответствие в обеих таблицах, и не включает строки без соответствия
-* в условии задания написано - работники, чьи зп есть в базе. работники без зп не нужны
-*/
-
-/* Левый JOIN позволяет включать записи из левой таблицы, даже если у них нет соответствующих записей в правой таблице.
- * таким образом мы получим абсолютно всех работников, даже без зп
-SELECT e.employee_name, s.monthly_salary
-FROM employees e
-LEFT JOIN employee_salary es ON e.id = es.employee_id
-LEFT JOIN salary s ON es.salary_id = s.id;
-*/
 
 -- 2. Вывести всех работников у которых ЗП меньше 2000.
 SELECT e.employee_name, s.monthly_salary
@@ -42,9 +12,6 @@ JOIN employees e ON e.id = es.employee_id
 where s.monthly_salary < 2000;
  
 -- 3. Вывести все зарплатные позиции, но работник по ним не назначен. (ЗП есть, но не понятно кто её получает.)
--- задание обратное 1
--- основная таблица зарплата, к ней присоединяем таблицу с айдишками и именами
--- используем left join + where, чтобы отобрать только зп и нулевые имена
 
 SELECT s.monthly_salary, e.employee_name
 FROM salary s
@@ -137,15 +104,6 @@ JOIN employees e ON e.id = re.employee_id
 JOIN employee_salary es ON e.id = es.employee_id
 JOIN salary s ON s.id = es.salary_id
 where r.role_name ILIKE '%java developer%';
-
-/*
-id r  | role_name      | 
-id re | employee_id    | role_id
-id e  | employee_name  |
-id s  | monthly_salary |
-id es | employee_id    | salary_id
-*/
-
 
 -- 16. Вывести зарплаты Python разработчиков
 SELECT r.role_name, s.monthly_salary 

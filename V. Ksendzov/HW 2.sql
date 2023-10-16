@@ -2,7 +2,7 @@
 
 select * from students;
 
--- 2. Вывести всех студентов в таблице. (?)
+-- 2. Вывести всех студентов в таблице.
 
 select name from students;
 
@@ -71,7 +71,7 @@ where created_on='2021-07-12 00:00:00' and name like '%Andrey%';
 select * from students
 where created_on = '2021-07-12 00:00:00' and name like '%8%';
 
---  17. Вывести пользователя у которых id равен 110 (обратить внимание!!!!!!!!!!!)
+--  17. Вывести пользователя у которых id равен 110
 
 select * from students
 where id=110;
